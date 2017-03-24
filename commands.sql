@@ -54,3 +54,33 @@ drop table memberList;
 
 - 日付・時刻型
 日付と時刻: datetime 日付: date 時刻: time
+
+
+-- レコードの挿入と表示
+
+-- テーブルをつくる
+create table memberList (
+	  id int,
+	  name varchar(32),
+	  password char(4)
+	  
+);
+
+-- レコードの挿入
+-- insert文
+-- 1つのカラムにレコードを入れるとき
+insert into テーブル名 (カラム名) values (挿入するレコード);
+insert into memberList (id) values (1);
+
+-- 複数のカラムにレコードを入れるとき
+insert into テーブル名 (カラム1, カラム2) values (レコード1, レコード2);
+insert into memberList (id, name, password) values (2, 'user2', '2222');
+
+-- レコードの表示
+-- select文
+-- テーブルの全てのレコードを見る
+select * from テーブル名;
+
+-- 特定のカラムのレコードを見る
+select カラム名 from テーブル名;
+select id from memberList;
