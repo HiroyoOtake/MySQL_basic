@@ -46,3 +46,11 @@ select * from memberList;
 drop table memberList;
 
 
+- 数値型
+整数: int 小数: float など
+
+- 文字列型
+固定長: char() 可変長: varchar() テキスト(長い文字列): text
+
+- 日付・時刻型
+日付と時刻: datetime 日付: date 時刻: time
