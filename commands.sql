@@ -106,3 +106,25 @@ insert into memberList (id ,name) values
 
 -- NULLを挿入する
 insert into memberList (id) values (NULL);
+
+
+-- 自動連番(auto_increment)
+drop table memberList;
+
+create table memberList (
+	id int primary key auto_increment,
+	name varchar(32)
+
+);
+
+desc memberList;
+
+insert into memberList (name) values
+  ('kashiwagi'),
+  ('tanaka'),
+  ('suzuki');
+
+insert into memberList (name) values
+  ('sato');
+
+
