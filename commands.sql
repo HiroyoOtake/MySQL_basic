@@ -142,3 +142,89 @@ desc memberList;
 insert into memberList (password) values ('1111');
 
 select * from memberList;
+
+-- select文の練習
+-- テーブルの作成
+create table sales (
+	 id int primary key auto_increment,
+	 name varchar(32),
+	 sale int,
+	 created_at datetime
+);
+
+-- データの挿入
+insert into sales (name, sale, created_at) values
+  ('hokkaido', 150, '2015-01-01 12:00:00' ),
+  ('tohoku',   200, '2015-02-01 12:00:00' ),
+  ('kanto',    500, '2015-03-01 12:00:00' ),
+  ('chubu',    300, '2015-04-01 12:00:00' ),
+  ('kinki',    400, '2015-05-01 12:00:00' ),
+  ('chugoku',  180, '2015-06-01 12:00:00' ),
+  ('shikoku',  140, '2015-07-01 12:00:00' ),
+  ('kyushu',   120, '2015-08-01 12:00:00' );
+
+-- 特定のカラムだけ抽出
+select id, name from sales;
+
+-- レコードの件数を調べる
+select count(sale) from sales;
+select count(*) from sales;
+
+-- エイリアス
+-- 本物を参照するために勝手につけた名前
+select id as '社員番号', sale as '売上' from sales;
+
+-- 演算とエイリアス
+select sale * 1000 from sales;
+select sale * 1000 as '売上(円)' from sales;
+
+-- 平均の算出
+select avg(sale) as '売上平均(千円)' from sales;
+
+-- 指定された条件のレコードを表示
+-- limit
+-- where
+-- like
+
+-- 表示件数の指定
+select * from sales limit 4;
+
+-- 売上が◯◯より大きい
+-- where と 比較演算子を使う
+select * from sales where sale > 150;
+select name, sale from sales where sale > 200;
+
+-- コンボ
+select * from sales where sale > 150 limit 3;
+
+-- 特定条件で検索
+select * from sales where name = 'kanto';
+select * from sales where id = 3;
+
+-- あいまい検索 like
+-- 売上が 100なんとか みたいな
+select * from sales where sale like '2%';
+
+-- 複数の条件指定
+-- 売上が200以上かつ400未満(AND)
+select * from sales where sale >= 200 and sale < 400;
+
+-- 売上が200未満、または400以上
+select * from sales where sale < 200 or sale >= 400;
+
+
+-- 並べ替え
+-- order by (desc asc)
+-- limit offset
+
+-- 売上の小さい順(昇順)に表示
+select * from sales order by sale asc;
+
+-- 売上の大きい順(降順)に表示
+select * from sales order by sale desc;
+
+-- 表示するレコードの範囲を決める
+select * from sales order by sale desc limit 2 offset 3;
+select * from sales order by sale desc limit 2 offset 4;
+
+
