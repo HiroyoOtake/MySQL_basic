@@ -84,3 +84,25 @@ select * from テーブル名;
 -- 特定のカラムのレコードを見る
 select カラム名 from テーブル名;
 select id from memberList;
+
+
+-- 主キー(primary key)
+ -- 値の重複がない
+ -- NULLが不可
+create table memberList (
+	id int primary key auto_increment,
+	name varchar(32) default 'BLANK!',
+	password char(4)
+
+);
+
+-- テストデータを入れる
+insert into memberList (id ,name) values
+(1, 'kashiwagi');
+
+-- 同じidのレコードを入れる
+insert into memberList (id ,name) values
+(1, 'tanaka');
+
+-- NULLを挿入する
+insert into memberList (id) values (NULL);
