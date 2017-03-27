@@ -127,4 +127,18 @@ insert into memberList (name) values
 insert into memberList (name) values
   ('sato');
 
+-- デフォルト値
+drop table memberList;
 
+create table memberList (
+	  id int primary key auto_increment,
+	  name varchar(32) default 'BLANK!!!',
+	  password char(4)
+	  
+);
+
+desc memberList;
+
+insert into memberList (password) values ('1111');
+
+select * from memberList;
