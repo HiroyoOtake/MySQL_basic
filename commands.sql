@@ -250,3 +250,14 @@ delete from sales where sale < 200;
 -- 更新
 -- UPDATE テーブル名 SET カラム名 = 値
 update sales set name = 'HOKKAIDO' where id = 17;
+
+
+-- 作業ユーザーの設定について
+-- 特定のユーザーに対して、特定のデータベースの使用権限を与える
+
+-- 作業ユーザーとパスワードの設定
+-- grant all on データベース名.* to ユーザー名@localhost identified by 'パスワード';
+grant all on nowall.* to testuser@localhost identified by '9999';
+
+-- 作業ユーザーでログイン
+mysql -u testuser -p
