@@ -228,3 +228,25 @@ select * from sales order by sale desc limit 2 offset 3;
 select * from sales order by sale desc limit 2 offset 4;
 
 
+-- 削除
+-- レコード全消し
+delete from sales;
+
+-- 再びテストレコード挿入
+insert into sales (name, sale, created_at) values
+  ('hokkaido', 150, '2015-01-01 12:00:00' ),
+  ('tohoku',   200, '2015-02-01 12:00:00' ),
+  ('kanto',    500, '2015-03-01 12:00:00' ),
+  ('chubu',    300, '2015-04-01 12:00:00' ),
+  ('kinki',    400, '2015-05-01 12:00:00' ),
+  ('chugoku',  180, '2015-06-01 12:00:00' ),
+  ('shikoku',  140, '2015-07-01 12:00:00' ),
+  ('kyushu',   120, '2015-08-01 12:00:00' );
+
+-- 条件を指定して削除
+delete from sales where id = 12;
+delete from sales where sale < 200;
+
+-- 更新
+-- UPDATE テーブル名 SET カラム名 = 値
+update sales set name = 'HOKKAIDO' where id = 17;
