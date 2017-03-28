@@ -261,3 +261,97 @@ grant all on nowall.* to testuser@localhost identified by '9999';
 
 -- 作業ユーザーでログイン
 mysql -u testuser -p
+
+
+--結合
+/*
+ * データベースの作成
+  */
+  create database elites_blog;
+use elites_blog;
+
+/*
+ * テーブルの作成
+  */
+  -- カテゴリーテーブルの作成
+CREATE TABLE categories (
+	    id int not null auto_increment,
+	    name varchar(255) not null,
+	    primary key (id)
+	 
+);
+
+-- 投稿テーブルの作成
+-- category_id でカテゴリーテーブルを参照
+CREATE TABLE posts (
+	    id int not null auto_increment,
+	    category_id int not null,
+	    title varchar(255) not null,
+	    body text not null,
+	    primary key (id)
+	 
+);
+
+/*
+ * 初期データの作成
+  */
+  -- カテゴリーのデータ
+  INSERT INTO categories (id, name) VALUES (1, '日記');
+INSERT INTO categories (id, name) VALUES (2, '仕事');
+INSERT INTO categories (id, name) VALUES (3, '趣味');
+INSERT INTO categories (id, name) VALUES (4, 'その他');
+
+-- 投稿のデータ
+INSERT INTO posts (category_id, title, body) VALUES (1, '日記のタイトル1', '日記の本文1');
+INSERT INTO posts (category_id, title, body) VALUES (1, '日記のタイトル2', '日記の本文2');
+INSERT INTO posts (category_id, title, body) VALUES (1, '日記のタイトル3', '日記の本文3');
+INSERT INTO posts (category_id, title, body) VALUES (2, '仕事のタイトル1', '仕事の本文1');
+INSERT INTO posts (category_id, title, body) VALUES (2, '仕事のタイトル2', '仕事の本文2');
+INSERT INTO posts (category_id, title, body) VALUES (3, '趣味のタイトル1', '趣味の本文1');
+
+--内部結合
+SELECT
+  c.id,
+  p.category_id,
+  c.name as category,
+  p.title,
+  p.body
+FROM
+  categories as c          -- 検索のメインとなるテーブル
+JOIN
+  posts as p               -- 結合するテーブル
+ON
+  c.id = p.category_id     -- 結合条件
+;
+
+--外部結合
+--該当しないレコードも出力したいとき
+SELECT
+  c.id,
+  p.category_id,
+  c.name as category,
+  p.title,
+  p.body
+FROM
+  categories as c
+LEFT JOIN            -- カテゴリーテーブルのデータは必ず表示する
+  posts as p
+ON
+  c.id = p.category_id
+;
+
+--結合を利用した集計
+SELECT
+  c.id,
+  c.name,
+  count(p.id) as number_of_post    -- 投稿の件数を集計 
+FROM
+  categories as c
+LEFT JOIN
+  posts as p
+ON
+  c.id = p.category_id
+GROUP BY
+  c.id,
+  c.name
+;
